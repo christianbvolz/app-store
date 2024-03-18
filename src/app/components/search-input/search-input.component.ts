@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-search-input',
@@ -10,8 +10,10 @@ import { Router, RouterLink } from '@angular/router';
   styleUrl: './search-input.component.scss'
 })
 export class SearchInputComponent {
+  #route = inject(ActivatedRoute);
   #fb = inject(FormBuilder);
   #router = inject(Router);
+
 
   public searchForm = this.#fb.group({
     searchInput: ['', [Validators.required, Validators.minLength(3)]],
@@ -19,8 +21,9 @@ export class SearchInputComponent {
 
   public submit() {
     if (this.searchForm.valid) {
-      console.log(this.searchForm.value);
-      this.#router.navigate(['/search', { q: this.searchForm.value.searchInput}]);
+      const categoryId = this.#route.snapshot.queryParamMap.get('categoryId');
+      const searchInput = this.searchForm.value.searchInput;
+      this.#router.navigate(['/search'], { queryParams: { category: categoryId, q: searchInput }});
     }
   }
 }
