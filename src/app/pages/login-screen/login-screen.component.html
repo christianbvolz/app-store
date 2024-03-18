@@ -1,0 +1,12 @@
+<p>login-screen works!</p>
+<form [formGroup]="loginForm" (ngSubmit)="submit()">
+  <label>
+    User:
+    <input type="text" formControlName="userName" />
+  </label>
+  <label>
+    Password:
+    <input type="text" formControlName="userPassword" />
+  </label>
+  <button [disabled]="!loginForm.valid">Submit</button>
+</form>

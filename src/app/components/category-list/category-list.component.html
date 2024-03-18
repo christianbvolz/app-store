@@ -1,0 +1,17 @@
+<div>
+  <ul>
+    @for (category of getCategories(); track $index) {
+      <li>
+        <a
+        routerLink="/search"
+        [queryParams]="{ categoryId: category.id }"
+        outerLinkActive="active"
+        >
+        {{ category.name }}
+        </a>
+      </li>
+    } @empty {
+      <li>Carregando...</li>
+    }
+  </ul>
+</div>
