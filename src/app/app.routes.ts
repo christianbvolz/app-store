@@ -3,6 +3,7 @@ import { LoginScreenComponent } from './pages/login-screen/login-screen.componen
 import { HomeScreenComponent } from './pages/home-screen/home-screen.component';
 import { ProductDetailsScreenComponent } from './pages/product-details-screen/product-details-screen.component';
 import { SearchScreenComponent } from './pages/search-screen/search-screen.component';
+import { CartScreenComponent } from './pages/cart-screen/cart-screen.component';
 
 export const routes: Routes = [
   {
@@ -20,5 +21,9 @@ export const routes: Routes = [
   {
     path: 'product/:id',
     component: ProductDetailsScreenComponent
+  },
+  {
+    path: 'cart',
+    component: CartScreenComponent
   }
 ];

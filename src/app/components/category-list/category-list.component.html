@@ -1,17 +1,14 @@
-<div>
-  <ul>
-    @for (category of getCategories(); track $index) {
-      <li>
-        <a
-        routerLink="/search"
-        [queryParams]="{ categoryId: category.id }"
-        outerLinkActive="active"
-        >
-        {{ category.name }}
-        </a>
-      </li>
-    } @empty {
-      <li>Carregando...</li>
-    }
-  </ul>
-</div>
+<button mat-button [matMenuTriggerFor]="categories">Categories</button>
+<mat-menu #categories="matMenu">
+  @for (category of getCategories(); track $index) {
+    <button mat-menu-item
+    routerLink="/search"
+    [queryParams]="{ category: category.id }"
+    outerLinkActive="active"
+    >
+    {{ category.name }}
+  </button>
+} @empty {
+  <button mat-menu-item>Carregando...</button>
+}
+</mat-menu>

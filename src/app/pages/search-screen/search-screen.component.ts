@@ -2,30 +2,29 @@ import { Component, OnInit, inject, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MlApiService } from '../../services/ml-api.service';
 import { Product } from '../../interfaces/Product';
-import { SearchInputComponent } from '../../components/search-input/search-input.component';
-import { CategoryListComponent } from '../../components/category-list/category-list.component';
+import { HeaderMenuComponent } from '../../components/header-menu/header-menu.component';
+import { ProductsListComponent } from '../../components/products-list/products-list.component';
 
 @Component({
   selector: 'app-search-screen',
   standalone: true,
-  imports: [SearchInputComponent, CategoryListComponent],
+  imports: [HeaderMenuComponent, ProductsListComponent],
   templateUrl: './search-screen.component.html',
   styleUrl: './search-screen.component.scss'
 })
 export class SearchScreenComponent implements OnInit {
   #apiService = inject(MlApiService);
   #route = inject(ActivatedRoute);
-  public getProducts = signal< { results: Product[] } | null >(null);
-
+  
+  public getProducts = signal<Product[] | null >(null);
 
   ngOnInit(): void {
-    const categoryId = this.#route.snapshot.queryParamMap.get('categoryId');
-    const searchInput = this.#route.snapshot.queryParamMap.get('q');
-    this.#apiService.getProducts$(categoryId, searchInput)
-      .subscribe({
-        next: (next) => this.getProducts.set(next),
+    this.#route.queryParams.subscribe(queries => {
+      this.#apiService.getProducts$(queries['category'], queries['q']).subscribe({
+        next: (next) => this.getProducts.set(next.results),
         error: (error) => console.log(error),
         complete: () => console.log('getProducts complete'),
+      });
     });
   }
 }

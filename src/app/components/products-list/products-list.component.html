@@ -1,0 +1,14 @@
+<mat-grid-list cols="4" rowHeight="2:1">
+  @for (product of productsList(); track $index) {
+    <mat-grid-tile 
+    [routerLink]="['/product', product.id]"
+    >
+      <img src="{{ product.thumbnail }}" alt="{{ product.title }}">
+      <h2>{{ product.title }}</h2>
+      <h3>{{ product.price }}</h3>
+    </mat-grid-tile>
+  } @empty {
+    <div>No products found</div>
+  }
+</mat-grid-list>
+

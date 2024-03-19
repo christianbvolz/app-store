@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { SearchInputComponent } from '../../components/search-input/search-input.component';
+import { HeaderMenuComponent } from '../../components/header-menu/header-menu.component';
 
 @Component({
   selector: 'app-product-details-screen',
   standalone: true,
-  imports: [SearchInputComponent],
+  imports: [HeaderMenuComponent],
   templateUrl: './product-details-screen.component.html',
   styleUrl: './product-details-screen.component.scss'
 })

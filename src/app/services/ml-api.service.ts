@@ -18,7 +18,7 @@ export class MlApiService {
       const searchUrl: URL = new URL(environment.searchUrl);
       if (categoryId) searchUrl.searchParams.set('category', categoryId);
       if (searchInput) searchUrl.searchParams.set('q', searchInput);
-
+      
       return this.#http.get<{ results: Product[] }>(searchUrl.toString());
     }
 }

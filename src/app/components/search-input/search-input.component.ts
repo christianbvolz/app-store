@@ -21,9 +21,10 @@ export class SearchInputComponent {
 
   public submit() {
     if (this.searchForm.valid) {
-      const categoryId = this.#route.snapshot.queryParamMap.get('categoryId');
+      const categoryId = this.#route.snapshot.queryParamMap.get('category');
       const searchInput = this.searchForm.value.searchInput;
-      this.#router.navigate(['/search'], { queryParams: { category: categoryId, q: searchInput }});
+      
+      this.#router.navigate(['/search'], { queryParams: { category: categoryId, q: searchInput } });
     }
   }
 }

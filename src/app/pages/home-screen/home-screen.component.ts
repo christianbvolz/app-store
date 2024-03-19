@@ -2,13 +2,13 @@ import { Component, OnInit, inject, signal } from '@angular/core';
 import { MlApiService } from '../../services/ml-api.service';
 import { Category } from '../../interfaces/Category';
 import { RouterLink } from '@angular/router';
-import { CategoryListComponent } from '../../components/category-list/category-list.component';
-import { SearchInputComponent } from '../../components/search-input/search-input.component';
+import { HeaderMenuComponent } from '../../components/header-menu/header-menu.component';
+
 
 @Component({
   selector: 'app-home-screen',
   standalone: true,
-  imports: [RouterLink, CategoryListComponent, SearchInputComponent],
+  imports: [RouterLink, HeaderMenuComponent],
   templateUrl: './home-screen.component.html',
   styleUrl: './home-screen.component.scss'
 })
