@@ -3,6 +3,7 @@ export interface Product {
   title: string,
   condition: string,
   thumbnail_id: string,
+  initial_quantity: number,
   catalog_product_id: string,
   listing_type_id: string,
   permalink: string,
@@ -30,5 +31,11 @@ export interface Product {
   catalog_listing: boolean,
   discounts: any,
   promotions: [],
+  pictures: [
+    {
+      id: string,
+      url: string,
+    }
+  ],
   inventory_id: string
 }

@@ -8,22 +8,27 @@ import { CartScreenComponent } from './pages/cart-screen/cart-screen.component';
 export const routes: Routes = [
   {
     path: '',
+    title: 'App Store',
     component: HomeScreenComponent
   },
   {
     path: 'login',
+    title: 'Login page',
     component: LoginScreenComponent
   },
   {
     path: 'search',
+    title: 'Search page',
     component: SearchScreenComponent
   },
   {
     path: 'product/:id',
+    title: 'Product page',
     component: ProductDetailsScreenComponent
   },
   {
     path: 'cart',
+    title: 'Cart page',
     component: CartScreenComponent
   }
 ];

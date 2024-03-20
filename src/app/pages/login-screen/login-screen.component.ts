@@ -1,13 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { HeaderMenuComponent } from '../../components/header-menu/header-menu.component';
-
 
 @Component({
   selector: 'app-login-screen',
   standalone: true,
-  imports: [ReactiveFormsModule, HeaderMenuComponent],
+  imports: [ReactiveFormsModule],
   templateUrl: './login-screen.component.html',
   styleUrl: './login-screen.component.scss'
 })

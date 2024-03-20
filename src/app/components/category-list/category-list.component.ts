@@ -14,6 +14,7 @@ import {MatButtonModule} from '@angular/material/button';
 })
 export class CategoryListComponent {
   #apiService = inject(MlApiService);
+  
   public getCategories = signal< null | Category[] >(null);
 
   ngOnInit(): void {
