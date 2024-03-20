@@ -15,14 +15,14 @@ export class SearchScreenComponent implements OnInit {
   #apiService = inject(MlApiService);
   #route = inject(ActivatedRoute);
   
-  public getProducts = signal<Product[] | null >(null);
+  public getProducts = signal<Product[] | [] >([]);
 
   ngOnInit(): void {
     this.#route.queryParams.subscribe(queries => {
-      this.#apiService.getProductsList$(queries['category'], queries['q']).subscribe({
+      this.#apiService.getSearchProductsList$(queries['category'], queries['q']).subscribe({
         next: (next) => this.getProducts.set(next.results),
         error: (error) => console.log(error),
-        complete: () => console.log('getProductsList complete'),
+        complete: () => console.log('getSearchProductsList complete'),
       });
     });
   }

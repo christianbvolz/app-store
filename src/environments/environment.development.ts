@@ -1,5 +1,5 @@
 export const environment = {
   categoriesUrl: 'https://api.mercadolibre.com/sites/MLB/categories',
-  productUrl: (productId: string) => `https://api.mercadolibre.com/items/${productId}`,
+  productUrl: 'https://api.mercadolibre.com/items',
   searchUrl: 'https://api.mercadolibre.com/sites/MLB/search',
 };

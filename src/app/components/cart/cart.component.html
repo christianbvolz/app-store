@@ -1,0 +1,22 @@
+<ul>
+  @for (product of cartList(); track $index) {
+    <li>
+      <h1>{{ product.title }}</h1>
+      <img src="{{ product.thumbnail }}" alt="{{ product.title }}">
+      <h2>Price {{ product.price }}</h2>
+      <label>
+        Quantity:
+        <input type="number"
+        #quantitiesToBuy
+        value="{{ product.order_quantity }}"
+        min="1"
+        max="{{ product.initial_quantity }}"
+        (input)="sendQuantity({ quantity: quantitiesToBuy.value, id: product.id })"
+        />
+      </label>
+    <Button (click)="removeItem(product.id)">Remove</Button>
+    </li>
+  }
+</ul>
+<p>Total price: {{ this.totalPrice() }}</p>
+<button>Go to Checkout</button>

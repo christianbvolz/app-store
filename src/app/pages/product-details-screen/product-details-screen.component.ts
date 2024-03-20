@@ -1,12 +1,12 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Product } from '../../interfaces/Product';
+import { Product, CartProduct } from '../../interfaces/Product';
 import { MlApiService } from '../../services/ml-api.service';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { BuyPopupComponent } from '../../components/buy-popup/buy-popup.component';
-import { addToCart } from '../../utils/CartStorage';
+import { addOrUpdateToCart } from '../../utils/CartStorage';
 
 @Component({
   selector: 'app-product-details-screen',
@@ -40,9 +40,10 @@ export class ProductDetailsScreenComponent implements OnInit {
   addToCartAndPopup(quantitiesToBuy: string): void {
     this.#apiService.getProduct$(this.productId).subscribe({
       next: (next) => {
-        addToCart(this.productId, quantitiesToBuy);
+        const cartProduct = { ...this.getProduct(), order_quantity: quantitiesToBuy } as CartProduct;
+        addOrUpdateToCart(cartProduct);
         this.#dialog.open(BuyPopupComponent,
-          { data: { productId: this.productId, productTitle: this.getProduct()?.title } })
+          { data: cartProduct })
       },
       error: (error) => console.log(error),
       complete: () => console.log('getProduct complete'),

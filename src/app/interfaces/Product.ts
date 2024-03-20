@@ -39,3 +39,7 @@ export interface Product {
   ],
   inventory_id: string
 }
+
+export interface CartProduct extends Product {
+  order_quantity: string,
+}

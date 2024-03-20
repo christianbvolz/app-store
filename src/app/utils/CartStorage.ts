@@ -1,15 +1,15 @@
-import { ProductCart } from "../interfaces/ProductCart";
+import { CartProduct } from "../interfaces/Product";
 
-export const addToCart = (productId: string, quantity: string): void => {
+export const addOrUpdateToCart = (cartProduct: CartProduct): void => {
   const cart = window.localStorage.getItem('cartProducts');
 
   if (cart) {
-    let productCartArray = JSON.parse(cart) as ProductCart[];
-    productCartArray = productCartArray.filter(product => product.id !== productId);
-    productCartArray.push({ id: productId, quantity });
-    window.localStorage.setItem('cartProducts', JSON.stringify(productCartArray));
+    let cartProductArray = JSON.parse(cart) as CartProduct[];
+    cartProductArray = cartProductArray.filter(product => product.id !== cartProduct.id);
+    cartProductArray.push(cartProduct);
+    window.localStorage.setItem('cartProducts', JSON.stringify(cartProductArray));
   } else {
-    const newCart = [{ id: productId, quantity }];
+    const newCart = [cartProduct];
     window.localStorage.setItem('cartProducts', JSON.stringify(newCart));
   }
 };
@@ -17,8 +17,8 @@ export const addToCart = (productId: string, quantity: string): void => {
 export const removeFromCart = (productId: string): void => {
   const cart = window.localStorage.getItem('cartProducts');
   if (cart) {
-    let productCartArray = JSON.parse(cart) as ProductCart[];
-    productCartArray = productCartArray.filter(product => product.id !== productId);
-    window.localStorage.setItem('cartProducts', JSON.stringify(productCartArray));
+    let cartProductArray = JSON.parse(cart) as CartProduct[];
+    cartProductArray = cartProductArray.filter(product => product.id !== productId);
+    window.localStorage.setItem('cartProducts', JSON.stringify(cartProductArray));
   }
 };

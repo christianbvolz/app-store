@@ -1,1 +1,6 @@
-<p>cart-screen works!</p>
+<app-cart
+  [cartList]="getCart()"
+  (outputQuantity)="updateQuantity($event)"
+  (outputRemoveItem)="removeItem($event)"
+>
+</app-cart>

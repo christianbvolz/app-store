@@ -10,10 +10,11 @@ import { RouterLink } from '@angular/router';
   templateUrl: './products-list.component.html',
   styleUrl: './products-list.component.scss'
 })
-export class ProductsListComponent {
-  public productsList = signal<Product[] | null>(null);
 
-  @Input({ required: true }) set setProductsList(value: Product[] | null){
+export class ProductsListComponent {
+  public productsList = signal<Product[] | []>([]);
+
+  @Input({ required: true }) set setProductsList(value: Product[] | []) {
     this.productsList.set(value);
   }
 }
