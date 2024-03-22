@@ -1,6 +1,5 @@
-import { Component, OnInit, inject, signal } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { CartProduct } from '../../interfaces/Product';
-import { MlApiService } from '../../services/ml-api.service';
 import { CartComponent } from '../../components/cart/cart.component';
 import { removeFromCart } from '../../utils/CartStorage';
 
@@ -12,8 +11,6 @@ import { removeFromCart } from '../../utils/CartStorage';
   styleUrl: './cart-screen.component.scss'
 })
 export class CartScreenComponent implements OnInit {
-  #apiService = inject(MlApiService);
-
   getCart = signal<CartProduct[] | []>([]);
   totalPrice = signal<Number>(0);
 

@@ -4,6 +4,7 @@ import { HomeScreenComponent } from './pages/home-screen/home-screen.component';
 import { ProductDetailsScreenComponent } from './pages/product-details-screen/product-details-screen.component';
 import { SearchScreenComponent } from './pages/search-screen/search-screen.component';
 import { CartScreenComponent } from './pages/cart-screen/cart-screen.component';
+import { CheckoutScreenComponent } from './pages/checkout-screen/checkout-screen.component';
 
 export const routes: Routes = [
   {
@@ -30,5 +31,10 @@ export const routes: Routes = [
     path: 'cart',
     title: 'Cart page',
     component: CartScreenComponent
+  },
+  {
+    path: 'checkout',
+    title: 'Checkout page',
+    component: CheckoutScreenComponent
   }
 ];

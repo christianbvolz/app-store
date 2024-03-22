@@ -22,3 +22,6 @@ export const removeFromCart = (productId: string): void => {
     window.localStorage.setItem('cartProducts', JSON.stringify(cartProductArray));
   }
 };
+
+export const cleanCart = (): void => 
+  window.localStorage.setItem('cartProducts', JSON.stringify([]));

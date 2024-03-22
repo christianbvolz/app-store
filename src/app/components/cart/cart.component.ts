@@ -1,6 +1,7 @@
-import { Component, EventEmitter, OnChanges, OnInit, Output, SimpleChanges, input, signal } from '@angular/core';
+import { Component, EventEmitter, OnChanges, OnInit, Output, SimpleChanges, inject, input, signal } from '@angular/core';
 import { CartProduct } from '../../interfaces/Product';
 import { removeFromCart } from '../../utils/CartStorage';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -10,6 +11,7 @@ import { removeFromCart } from '../../utils/CartStorage';
   styleUrl: './cart.component.scss'
 })
 export class CartComponent implements OnInit, OnChanges {
+  #router = inject(Router);
   // @Input({ required: true }) set setCartList(value: CartProduct[] | []) {
   //   this.cartList.set(value);
   // }
@@ -44,4 +46,7 @@ export class CartComponent implements OnInit, OnChanges {
     this.outputRemoveItem.emit(id);
   }
 
+  goToCheckout(): void {
+    this.#router.navigateByUrl('/checkout', { state: this.cartList() });
+  }
 }
