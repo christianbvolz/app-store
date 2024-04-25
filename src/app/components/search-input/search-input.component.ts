@@ -22,9 +22,12 @@ export class SearchInputComponent {
   public submit() {
     if (this.searchForm.valid) {
       const categoryId = this.#route.snapshot.queryParamMap.get('category');
+      const limit = this.#route.snapshot.queryParamMap.get('limit') || 20;
+      const condition = this.#route.snapshot.queryParamMap.get('condition');
+      
       const searchInput = this.searchForm.value.searchInput;
       
-      this.#router.navigate(['/search'], { queryParams: { category: categoryId, q: searchInput } });
+      this.#router.navigate(['/search'], { queryParams: { page:1, limit, condition, category: categoryId, q: searchInput } });
     }
   }
 }

@@ -3,7 +3,8 @@
     <mat-grid-tile 
     [routerLink]="['/product', product.id]"
     >
-      <img src="{{ product.thumbnail }}" alt="{{ product.title }}">
+    <img src="{{ 'http://localhost:3001/images/' + product.id + '-p.jpg' }}" alt="{{ product.title }}">
+
       <h2>{{ product.title }}</h2>
       <h3>{{ product.price }}</h3>
     </mat-grid-tile>

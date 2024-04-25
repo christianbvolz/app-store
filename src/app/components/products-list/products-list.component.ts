@@ -15,6 +15,8 @@ export class ProductsListComponent {
   public productsList = signal<Product[] | []>([]);
 
   @Input({ required: true }) set setProductsList(value: Product[] | []) {
+    console.log(value);
+    
     this.productsList.set(value);
   }
 }

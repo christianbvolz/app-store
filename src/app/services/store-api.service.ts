@@ -8,29 +8,28 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class MlApiService {
+export class StoreApiService {
   #http = inject(HttpClient);
   
   public getCategories$ = (): Observable<Category[]> =>
-    this.#http.get<Category[]>(environment.categoriesUrl);
+    this.#http.get<Category[]>(environment.baseUrl + '/categories');
 
   public getProduct$ = (productId: string): Observable<Product> => {
-    const urlWithId = environment.productUrl + `/${productId}`
+    const urlWithId = environment.baseUrl + `/products/${productId}`;
+    
     return this.#http.get<Product>(urlWithId);
   }
 
-  // endpoint cagado do ml
-  public getProductsList$ = (productIds: string): Observable<Product[]> =>{
-    const urlWithId = environment.productUrl + `?ids=${productIds}`
-    return this.#http.get<Product[]>(urlWithId);
-  }
-  
   public getSearchProductsList$ = 
-    (categoryId?: string, searchInput?: string): Observable<{ results: Product[] }> => {
-      const searchUrl: URL = new URL(environment.searchUrl);
+    (page: string, limit: string, categoryId?: string, searchInput?: string, condition?: string): Observable<Product[]> => {
+      
+      const searchUrl: URL = new URL(environment.baseUrl + '/products');
+      searchUrl.searchParams.set('page', page);
+      searchUrl.searchParams.set('limit', limit);
       if (categoryId) searchUrl.searchParams.set('category', categoryId);
       if (searchInput) searchUrl.searchParams.set('q', searchInput);
+      if (condition) searchUrl.searchParams.set('condition', condition);
       
-      return this.#http.get<{ results: Product[] }>(searchUrl.toString());
+      return this.#http.get<Product[]>(searchUrl.toString());
   }
 }

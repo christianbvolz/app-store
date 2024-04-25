@@ -1,36 +1,36 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Product, CartProduct } from '../../interfaces/Product';
-import { MlApiService } from '../../services/ml-api.service';
-import {MatTabsModule} from '@angular/material/tabs';
-import {MatDialog, MatDialogModule} from '@angular/material/dialog';
-import { MatButtonModule } from '@angular/material/button';
+import { StoreApiService } from '../../services/store-api.service';
+import { MatDialog } from '@angular/material/dialog';
 import { BuyPopupComponent } from '../../components/buy-popup/buy-popup.component';
 import { addOrUpdateToCart } from '../../utils/CartStorage';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-product-details-screen',
   standalone: true,
-  imports: [MatTabsModule, MatButtonModule, MatDialogModule],
+  imports: [],
   templateUrl: './product-details-screen.component.html',
   styleUrl: './product-details-screen.component.scss'
 })
 export class ProductDetailsScreenComponent implements OnInit {
 
-  #apiService = inject(MlApiService);
+  #apiService = inject(StoreApiService);
   #route = inject(ActivatedRoute);
   #dialog = inject(MatDialog);
-  
+  imgUrl = '';
   productId = '';
-  imgs: string[] = [];
   getProduct = signal<Product | null>(null);
-
+  
   ngOnInit(): void {
     this.productId = this.#route.snapshot.params['id'];
+    this.imgUrl = environment.baseUrl + '/images/' + this.productId + '-p.jpg';
     this.#apiService.getProduct$(this.productId).subscribe({
       next: (next) => {
         this.getProduct.set(next);
-        this.imgs = next.pictures.map(picture => picture.url);
+        console.log(this.getProduct());
+        
       },
       error: (error) => console.log(error),
       complete: () => console.log('getProduct complete'),

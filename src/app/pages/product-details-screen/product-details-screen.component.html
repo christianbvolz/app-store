@@ -1,25 +1,17 @@
 <main>
   <div>
-    <mat-tab-group>
-      @for (img of imgs; track img) {
-        <mat-tab label="x">
-          <img src="{{ img }}" alt="{{ getProduct()?.title + ' image '  }}">
-        </mat-tab>
-      }
-    </mat-tab-group>
-  </div>
-  <div>
     <h1>{{ getProduct()?.title }}</h1>
-    <h3>{{ getProduct()?.currency_id }} {{ getProduct()?.price }}</h3>
-    <p>{{ 'Available Quantity: ' + getProduct()?.initial_quantity }}</p>
-    <p>{{ 'Condition: ' + getProduct()?.condition }}</p>
+    <h3>R$ {{ getProduct()?.price }}</h3>
+    <p>{{ 'Available Quantity: ' + getProduct()?.quantity }}</p>
+    <p>{{ 'Condition: ' + getProduct()?.condition?.conditionName }}</p>
+    <img src="{{ this.imgUrl }}" alt="{{ getProduct()?.title + ' image '  }}">
     <label>
       Quantity to buy:
       <input type="number"
       #quantitiesToBuy
       value="1"
       min="1"
-      [max]="getProduct()?.initial_quantity"
+      [max]="getProduct()?.quantity"
       />
     </label>
     <button mat-button (click)="addToCartAndPopup(quantitiesToBuy.value)">Add to Cart</button>

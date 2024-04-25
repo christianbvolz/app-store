@@ -1,5 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
-import { MlApiService } from '../../services/ml-api.service';
+import { StoreApiService } from '../../services/store-api.service';
 import { Category } from '../../interfaces/Category';
 import { RouterLink } from '@angular/router';
 import {MatMenuModule} from '@angular/material/menu';
@@ -13,9 +13,9 @@ import {MatButtonModule} from '@angular/material/button';
   styleUrl: './category-list.component.scss'
 })
 export class CategoryListComponent {
-  #apiService = inject(MlApiService);
+  #apiService = inject(StoreApiService);
   
-  public getCategories = signal< null | Category[] >(null);
+  public getCategories = signal< [] | Category[] >([]);
 
   ngOnInit(): void {
     this.#apiService.getCategories$().subscribe({
